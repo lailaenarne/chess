@@ -1,0 +1,6 @@
+{
+  "name": "Chess Game",
+  "description": "An 8-bit pixel-art styled chess game where users can play against a local Gemma LLM (via LM Studio) or against a built-in offline minimax computer.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
