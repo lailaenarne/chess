@@ -16,6 +16,7 @@ interface RetroLCDHeaderProps {
   resultMessage: string | null;
   boardStyle: BoardStyle;
   isGemmaLoading: boolean;
+  hasStarted: boolean;
 }
 
 const PIECE_VALUES: Record<string, number> = { p: 1, n: 3, b: 3, r: 5, q: 9, k: 0 };
@@ -28,12 +29,18 @@ export const RetroLCDHeader: React.FC<RetroLCDHeaderProps> = ({
   isGameOver,
   resultMessage,
   boardStyle,
-  isGemmaLoading
+  isGemmaLoading,
+  hasStarted
 }) => {
   const [seconds, setSeconds] = useState(0);
 
-  // Simple game clock
+  // Simple game clock running only when game is started and not over
   useEffect(() => {
+    if (!hasStarted) {
+      setSeconds(0);
+      return;
+    }
+
     let interval: NodeJS.Timeout;
     if (!isGameOver) {
       interval = setInterval(() => {
@@ -41,7 +48,7 @@ export const RetroLCDHeader: React.FC<RetroLCDHeaderProps> = ({
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [isGameOver]);
+  }, [hasStarted, isGameOver]);
 
   const formatTime = (totalSecs: number) => {
     const mins = Math.floor(totalSecs / 60);

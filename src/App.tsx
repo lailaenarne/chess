@@ -633,6 +633,7 @@ export default function App() {
             resultMessage={resultMessage}
             boardStyle={settings.boardStyle}
             isGemmaLoading={isGemmaLoading}
+            hasStarted={moveHistory.length > 0}
           />
         </div>
 
